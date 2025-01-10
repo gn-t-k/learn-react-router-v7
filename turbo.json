@@ -1,0 +1,29 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^generate", "^check", "^build"]
+		},
+		"generate": {
+			"dependsOn": ["^generate"]
+		},
+		"check": {
+			"dependsOn": ["^check"]
+		},
+		"check:fix": {
+			"dependsOn": ["^check:fix"]
+		},
+		"dev": {
+			"dependsOn": ["^generate", "^dev"],
+			"cache": false,
+			"persistent": true
+		},
+		"storybook": {
+			"dependsOn": ["^storybook"]
+		},
+		"clean": {
+			"dependsOn": ["^clean"]
+		}
+	}
+}

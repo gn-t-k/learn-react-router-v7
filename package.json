@@ -1,0 +1,24 @@
+{
+	"name": "learn-react-router-v7",
+	"private": true,
+	"packageManager": "pnpm@9.0.0",
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"build": "turbo build",
+		"generate": "turbo generate",
+		"check": "pnpm run biome:check && turbo check",
+		"check:fix": "pnpm run biome:check --fix && turbo check:fix",
+		"biome:check": "biome check . --config-path=biome.jsonc",
+		"dev": "turbo dev",
+		"storybook": "turbo storybook",
+		"clean": "turbo run clean && rm -rf node_modules .turbo && pnpm store prune"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"turbo": "^2.3.3",
+		"typescript": "^5.7.2",
+		"@tsconfig/strictest": "^2.0.5"
+	}
+}
