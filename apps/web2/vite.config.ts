@@ -42,7 +42,7 @@ export default defineConfig(({ isSsrBuild }) => ({
 			miniflareOptions: (options) => {
 				options.compatibilityDate = "2024-11-18";
 				options.compatibilityFlags = ["nodejs_compat"];
-				options.d1Databases = { DB: "58e2d047-3151-4e2f-9b25-a035c00c6296" };
+				options.d1Databases = { DB: "my-database-id" };
 				// match where wrangler applies migrations to
 				options.d1Persist = ".wrangler/state/v3/d1";
 			},
