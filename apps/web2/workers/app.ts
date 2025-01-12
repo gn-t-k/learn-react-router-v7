@@ -1,16 +1,15 @@
-import { drizzle } from "drizzle-orm/d1";
 import { createRequestHandler } from "react-router";
 
-import { DatabaseContext } from "~/database/context";
-import * as schema from "~/database/schema";
+import { databaseProvider } from "@packages/database";
 
-interface CloudflareEnvironment {
-	DB: D1Database;
-}
+type CloudflareEnvironment = {
+	// biome-ignore lint/correctness/noUndeclaredVariables: @cloudflare/workers-types
+	db: D1Database;
+};
 
 declare module "react-router" {
 	export interface AppLoadContext {
-		VALUE_FROM_CLOUDFLARE: string;
+		// ここにcontextに渡したい値の型を定義
 	}
 }
 
@@ -22,11 +21,11 @@ const requestHandler = createRequestHandler(
 
 export default {
 	fetch(request, env) {
-		const db = drizzle(env.DB, { schema });
-		return DatabaseContext.run(db, () =>
+		return databaseProvider(env.db, () =>
 			requestHandler(request, {
-				VALUE_FROM_CLOUDFLARE: "Hello from Cloudflare",
+				// ここにcontextに渡したい値を定義
 			}),
 		);
 	},
+	// biome-ignore lint/correctness/noUndeclaredVariables: @cloudflare/workers-types
 } satisfies ExportedHandler<CloudflareEnvironment>;

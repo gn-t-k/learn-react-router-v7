@@ -5,12 +5,19 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"check": "tsc --noEmit",
-		"clean": "rm -rf node_modules"
+		"clean": "rm -rf node_modules",
+		"migration:generate": "dotenv -- drizzle-kit generate",
+		"migration:apply": "wrangler d1 migrations apply --local DB",
+		"migration:apply:production": "dotenv -- drizzle-kit migrate"
 	},
 	"dependencies": {
 		"drizzle-orm": "^0.38.3"
 	},
 	"devDependencies": {
-		"drizzle-kit": "^0.30.1"
+		"drizzle-kit": "^0.30.1",
+		"dotenv-cli": "^7.4.3",
+		"wrangler": "^3.87.0",
+		"typescript": "^5.7.2",
+		"@types/node": "^20"
 	}
 }
