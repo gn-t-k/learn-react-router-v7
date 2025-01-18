@@ -1,7 +1,6 @@
 import { vitePluginViteNodeMiniflare } from "@hiogawa/vite-node-miniflare";
 import { reactRouter } from "@react-router/dev/vite";
-import autoprefixer from "autoprefixer";
-import tailwindcss from "tailwindcss";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -12,11 +11,6 @@ export default defineConfig(({ isSsrBuild }) => ({
 					input: "./workers/app.ts",
 				}
 			: undefined,
-	},
-	css: {
-		postcss: {
-			plugins: [tailwindcss, autoprefixer],
-		},
 	},
 	ssr: {
 		target: "webworker",
@@ -42,12 +36,13 @@ export default defineConfig(({ isSsrBuild }) => ({
 			miniflareOptions: (options) => {
 				options.compatibilityDate = "2024-11-18";
 				options.compatibilityFlags = ["nodejs_compat"];
-				options.d1Databases = { DB: "my-database-id" };
+				options.d1Databases = { db: "58e2d047-3151-4e2f-9b25-a035c00c6296" };
 				// match where wrangler applies migrations to
-				options.d1Persist = ".wrangler/state/v3/d1";
+				options.d1Persist = "../../packages/database/.wrangler/state/v3/d1";
 			},
 		}),
 		reactRouter(),
 		tsconfigPaths(),
+		vanillaExtractPlugin(),
 	],
 }));

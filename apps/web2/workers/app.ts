@@ -2,14 +2,21 @@ import { createRequestHandler } from "react-router";
 
 import { databaseProvider } from "@packages/database";
 
-type CloudflareEnvironment = {
-	// biome-ignore lint/correctness/noUndeclaredVariables: @cloudflare/workers-types
-	db: D1Database;
-};
+declare global {
+	// biome-ignore lint/correctness/noUndeclaredVariables: worker-configuration.d.ts
+	interface CloudflareEnvironment extends Env {
+		// biome-ignore lint/correctness/noUndeclaredVariables: @cloudflare/workers-types
+		db: D1Database;
+	}
+}
 
 declare module "react-router" {
 	export interface AppLoadContext {
-		// ここにcontextに渡したい値の型を定義
+		cloudflare: {
+			env: CloudflareEnvironment;
+			// biome-ignore lint/correctness/noUndeclaredVariables: @cloudflare/workers-types
+			ctx: ExecutionContext;
+		};
 	}
 }
 
@@ -20,10 +27,10 @@ const requestHandler = createRequestHandler(
 );
 
 export default {
-	fetch(request, env) {
+	fetch: (request, env, ctx) => {
 		return databaseProvider(env.db, () =>
 			requestHandler(request, {
-				// ここにcontextに渡したい値を定義
+				cloudflare: { env, ctx },
 			}),
 		);
 	},

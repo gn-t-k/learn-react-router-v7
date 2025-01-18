@@ -1,7 +1,7 @@
 import type { Config } from "drizzle-kit";
 
 export default {
-	out: "./drizzle",
+	out: "./migrations",
 	schema: "./src/tables",
 	dialect: "sqlite",
 	driver: "d1-http",

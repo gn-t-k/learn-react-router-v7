@@ -4,16 +4,13 @@ import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
 export function Welcome({
-	guestBook,
+	tasks,
 	guestBookError,
-	message,
 }: {
-	guestBook: {
-		name: string;
-		id: number;
+	tasks: {
+		title: string;
 	}[];
 	guestBookError?: string;
-	message: string;
 }) {
 	const navigation = useNavigation();
 
@@ -53,7 +50,6 @@ export function Welcome({
 									</a>
 								</li>
 							))}
-							<li className="self-stretch p-3 leading-normal">{message}</li>
 						</ul>
 					</nav>
 					<section className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
@@ -72,16 +68,8 @@ export function Welcome({
 						>
 							<input
 								aria-label="Name"
-								name="name"
+								name="title"
 								placeholder="Name"
-								required
-								className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
-							/>
-							<input
-								aria-label="Email"
-								name="email"
-								type="email"
-								placeholder="your@email.com"
 								required
 								className="w-full dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:focus:ring-blue-500 h-10 px-3 rounded-lg border border-gray-200 focus:ring-1 focus:ring-blue-500"
 							/>
@@ -99,10 +87,9 @@ export function Welcome({
 							)}
 						</Form>
 						<ul className="text-center">
-							{<li className="p-3">{message}</li>}
-							{guestBook.map(({ id, name }) => (
-								<li key={id} className="p-3">
-									{name}
+							{tasks.map(({ title }) => (
+								<li key={title} className="p-3">
+									{title}
 								</li>
 							))}
 						</ul>

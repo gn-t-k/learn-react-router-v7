@@ -8,7 +8,11 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["apps/web/.react-router/*"]
+		"ignore": [
+			"apps/web/.react-router/*",
+			"apps/web2/.react-router/*",
+			"apps/web2/.worker-configuration.d.ts"
+		]
 	},
 	"formatter": {
 		"enabled": true
