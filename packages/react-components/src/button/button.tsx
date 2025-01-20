@@ -1,18 +1,17 @@
 import clsx from "clsx";
-import {
-	type ComponentRef,
-	type ForwardRefRenderFunction,
-	forwardRef,
-} from "react";
+import type { ComponentPropsWithRef, FC } from "react";
 import { Button as AriaButton, type ButtonProps } from "react-aria-components";
 import { type ButtonVariants, buttonStyle } from "./button.css";
 
-type Props = ButtonProps & ButtonVariants;
+type Props = ComponentPropsWithRef<"button"> & ButtonProps & ButtonVariants;
 
-const ButtonRender: ForwardRefRenderFunction<ComponentRef<"button">, Props> = (
-	{ className, variant, size, ...props },
+export const Button: FC<Props> = ({
+	className,
+	variant,
+	size,
 	ref,
-) => {
+	...props
+}) => {
 	return (
 		<AriaButton
 			className={clsx([className, buttonStyle({ variant, size })])}
@@ -21,4 +20,3 @@ const ButtonRender: ForwardRefRenderFunction<ComponentRef<"button">, Props> = (
 		/>
 	);
 };
-export const Button = forwardRef(ButtonRender);
