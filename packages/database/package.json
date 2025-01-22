@@ -7,7 +7,7 @@
 		"check": "tsc --noEmit",
 		"clean": "rm -rf node_modules",
 		"migration:generate": "dotenv -- drizzle-kit generate",
-		"migration:apply": "wrangler d1 migrations apply --local DB",
+		"migration:apply": "wrangler d1 migrations apply test-db-202501 --local --config ../../apps/web2/wrangler.toml",
 		"migration:apply:production": "dotenv -- drizzle-kit migrate"
 	},
 	"dependencies": {
