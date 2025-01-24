@@ -6,8 +6,7 @@
 		"build": "react-router build",
 		"generate": "react-router typegen && wrangler types",
 		"check": "tsc --noEmit",
-		"dev": "react-router dev",
-		"start": "wrangler dev",
+		"dev": "wrangler dev",
 		"clean": "rm -rf node_modules"
 	},
 	"dependencies": {

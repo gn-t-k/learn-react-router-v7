@@ -31,16 +31,6 @@ export default defineConfig(({ isSsrBuild }) => ({
 		},
 	},
 	plugins: [
-		// vitePluginViteNodeMiniflare({
-		// 	entry: "./workers/app.ts",
-		// 	miniflareOptions: (options) => {
-		// 		options.compatibilityDate = "2024-11-18";
-		// 		options.compatibilityFlags = ["nodejs_compat"];
-		// 		options.d1Databases = { db: "58e2d047-3151-4e2f-9b25-a035c00c6296" };
-		// 		// match where wrangler applies migrations to
-		// 		options.d1Persist = "../../packages/database/.wrangler/state/v3/d1";
-		// 	},
-		// }),
 		cloudflareDevProxy({
 			getLoadContext: ({ context }) => {
 				return {
