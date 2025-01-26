@@ -10,13 +10,16 @@
 		"clean": "rm -rf node_modules"
 	},
 	"dependencies": {
+		"@hono/vite-dev-server": "^0.18.1",
+		"@packages/database": "workspace:*",
 		"@packages/react-components": "workspace:*",
 		"@packages/styles": "workspace:*",
-		"@packages/database": "workspace:*",
 		"@react-router/node": "^7.1.1",
 		"@react-router/serve": "^7.1.1",
 		"@vanilla-extract/css": "^1.16.0",
 		"drizzle-orm": "~0.36.3",
+		"hono": "^4.6.18",
+		"hono-react-router-adapter": "^0.6.2",
 		"isbot": "^5.1.17",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
