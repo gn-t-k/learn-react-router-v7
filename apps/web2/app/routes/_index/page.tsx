@@ -18,7 +18,7 @@ export const Page: FC<Route.ComponentProps> = ({ loaderData }) => {
 	return (
 		<ul>
 			{loaderData.tasks.map((task) => (
-				<li key={task.id}>xxx{task.title}</li>
+				<li key={task.id}>{task.title}</li>
 			))}
 		</ul>
 	);

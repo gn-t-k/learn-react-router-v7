@@ -7,6 +7,7 @@ import {
 	isRouteErrorResponse,
 } from "react-router";
 
+import { ThemeProvider } from "@packages/styles";
 import type { Route } from "./+types/root";
 
 export const links: Route.LinksFunction = () => [
@@ -32,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Links />
 			</head>
 			<body>
-				{children}
+				<ThemeProvider>{children}</ThemeProvider>
 				<ScrollRestoration />
 				<Scripts />
 			</body>
