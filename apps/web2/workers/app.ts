@@ -3,6 +3,8 @@ import { Hono } from "hono";
 import { contextStorage, getContext } from "hono/context-storage";
 import { createRequestHandler } from "react-router";
 
+// biome-ignore lint/style/useNamingConvention: hono
+// biome-ignore lint/correctness/noUndeclaredVariables: <worker-configuration.d.ts
 const app = new Hono<{ Bindings: Env }>();
 
 app.use(contextStorage());

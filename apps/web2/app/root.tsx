@@ -8,6 +8,7 @@ import {
 } from "react-router";
 
 import { ThemeProvider } from "@packages/styles";
+import type { FC, PropsWithChildren } from "react";
 import type { Route } from "./+types/root";
 
 export const links: Route.LinksFunction = () => [
@@ -23,7 +24,7 @@ export const links: Route.LinksFunction = () => [
 	},
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export const Layout: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<html lang="en">
 			<head>
@@ -39,37 +40,54 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			</body>
 		</html>
 	);
-}
+};
 
-export default function App() {
+const App: FC = () => {
 	return <Outlet />;
-}
+};
+export default App;
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-	let message = "Oops!";
-	let details = "An unexpected error occurred.";
-	let stack: string | undefined;
+export const ErrorBoundary: FC<Route.ErrorBoundaryProps> = ({ error }) => {
+	const { message, details, stack } = (() => {
+		if (isRouteErrorResponse(error)) {
+			return error.status === 404
+				? {
+						message: "404",
+						details: "The requested page could not be found.",
+						stack: undefined,
+					}
+				: {
+						message: "Error",
+						details: error.statusText || "An unexpected error occurred.",
+						stack: undefined,
+					};
+		}
 
-	if (isRouteErrorResponse(error)) {
-		message = error.status === 404 ? "404" : "Error";
-		details =
-			error.status === 404
-				? "The requested page could not be found."
-				: error.statusText || details;
-	} else if (import.meta.env.DEV && error && error instanceof Error) {
-		details = error.message;
-		stack = error.stack;
-	}
+		const isDev = import.meta.env.DEV;
+		if (isDev && error && error instanceof Error) {
+			return {
+				message: "Oops!",
+				details: error.message,
+				stack: error.stack,
+			};
+		}
+
+		return {
+			message: "Oops!",
+			details: "An unexpected error occurred.",
+			stack: undefined,
+		};
+	})();
 
 	return (
-		<main className="pt-16 p-4 container mx-auto">
+		<main>
 			<h1>{message}</h1>
 			<p>{details}</p>
 			{stack && (
-				<pre className="w-full p-4 overflow-x-auto">
+				<pre>
 					<code>{stack}</code>
 				</pre>
 			)}
 		</main>
 	);
-}
+};

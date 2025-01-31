@@ -5,13 +5,13 @@ import { ServerRouter } from "react-router";
 
 const ABORT_DELAY = 5_000;
 
-export default async function handleRequest(
+const handleRequest = async (
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	routerContext: EntryContext,
 	_loadContext: AppLoadContext,
-) {
+): Promise<Response> => {
 	let responseStatus = responseStatusCode;
 	let shellRendered = false;
 
@@ -44,4 +44,5 @@ export default async function handleRequest(
 		headers: responseHeaders,
 		status: responseStatus,
 	});
-}
+};
+export default handleRequest;
