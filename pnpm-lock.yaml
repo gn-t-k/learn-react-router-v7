@@ -81,6 +81,9 @@ importers:
 
   apps/web2:
     dependencies:
+      '@coji/remix-auth-google':
+        specifier: ^4.2.0
+        version: 4.2.0
       '@hono/vite-dev-server':
         specifier: ^0.18.1
         version: 0.18.1(hono@4.6.18)(miniflare@3.20241230.1)(wrangler@3.101.0(@cloudflare/workers-types@4.20250109.0))
@@ -123,6 +126,9 @@ importers:
       react-router:
         specifier: ^7.1.1
         version: 7.1.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      remix-auth:
+        specifier: ^4.1.0
+        version: 4.1.0
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20241112.0
@@ -715,6 +721,9 @@ packages:
 
   '@cloudflare/workers-types@4.20250109.0':
     resolution: {integrity: sha512-Y1zgSaEOOevl9ORpzgMcm4j535p3nK2lrblHHvYM2yxR50SBKGh+wvkRFAIxWRfjUGZEU+Fp6923EGioDBbobA==}
+
+  '@coji/remix-auth-google@4.2.0':
+    resolution: {integrity: sha512-H9i3fvVz0GE18GUZHpz7p7FQjuiuloTIBAPjW7cfv7lUEk+mI6WRTVLEHJBLLuTlAF1+0EbzvPRYKutxZiFdfw==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -3917,6 +3926,10 @@ packages:
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
+  remix-auth@4.1.0:
+    resolution: {integrity: sha512-Xdy42clt+g79GCn+Wl1+B6S/yWnvrStnk62vo1pGuRuUwHC+pjmeEE52ZRkRPuhLGqsQnoDD9TVz/wfEJAGF8g==}
+    engines: {node: '>=20.0.0'}
+
   require-like@0.1.2:
     resolution: {integrity: sha512-oyrU88skkMtDdauHDuKVrgR+zuItqr6/c//FXzvmxRGMexSDc6hNvJInGW3LL46n+8b50RykrvwSUIIQH2LQ5A==}
 
@@ -5209,6 +5222,8 @@ snapshots:
     optional: true
 
   '@cloudflare/workers-types@4.20250109.0': {}
+
+  '@coji/remix-auth-google@4.2.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -8874,6 +8889,8 @@ snapshots:
       strip-indent: 3.0.0
 
   regenerator-runtime@0.14.1: {}
+
+  remix-auth@4.1.0: {}
 
   require-like@0.1.2: {}
 
