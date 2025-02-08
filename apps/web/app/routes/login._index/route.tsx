@@ -7,7 +7,7 @@ import {
 	CardTitle,
 } from "@packages/react-components";
 import type { FC } from "react";
-import { card, cardFooter, container } from "./page.css";
+import { card, cardFooter, container } from "./route.css";
 
 const Page: FC = () => {
 	return (
