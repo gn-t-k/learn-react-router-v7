@@ -23,6 +23,7 @@
 		"hono": "^4.6.18",
 		"hono-react-router-adapter": "^0.6.2",
 		"isbot": "^5.1.17",
+		"nanoid": "^5.1.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-router": "^7.1.1",
