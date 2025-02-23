@@ -25,9 +25,9 @@ const verifyUser: OAuth2Strategy<SessionUser>["verify"] = async ({
 }) => {
 	const id = nanoid();
 	const profile = await GoogleStrategy.userProfile(tokens);
-	const email = profile.emails[0].value;
 	const name = profile.displayName;
-	const imageUrl = profile.photos?.[0].value;
+	const email = profile.emails[0].value;
+	const imageUrl = profile.photos[0].value;
 	const locale =
 		profile._json.locale ??
 		acceptLanguage.get(request.headers.get("accept-language")) ??
@@ -36,7 +36,6 @@ const verifyUser: OAuth2Strategy<SessionUser>["verify"] = async ({
 	const db = getDatabase();
 
 	try {
-		// TODO: ユーザーのupsert
 		const [user] = await db
 			.insert(users)
 			.values({ id, imageUrl, name })
@@ -53,8 +52,8 @@ const verifyUser: OAuth2Strategy<SessionUser>["verify"] = async ({
 		return {
 			id: user.id,
 			name: user.name,
-			email,
 			imageUrl: user.imageUrl,
+			email,
 			locale,
 		};
 	} catch (error) {
