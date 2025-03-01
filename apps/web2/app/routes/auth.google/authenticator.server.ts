@@ -1,13 +1,11 @@
 import { Authenticator } from "remix-auth";
 import { googleStrategy } from "./google-strategy";
+import type { SessionUser } from "./session-user";
 
-export type SessionUser = {
-	id: string;
-	email: string;
-	name: string;
-	imageUrl: string;
-	locale: string;
-};
-export const authenticator = new Authenticator<SessionUser>();
-
+const authenticator = new Authenticator<SessionUser>();
 authenticator.use(googleStrategy, "google");
+
+type AuthenticateByGoogle = (request: Request) => Promise<SessionUser>;
+export const authenticateByGoogle: AuthenticateByGoogle = async (request) => {
+	return await authenticator.authenticate("google", request);
+};

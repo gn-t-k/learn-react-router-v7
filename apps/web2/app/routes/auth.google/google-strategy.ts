@@ -3,9 +3,10 @@ import { getDatabase } from "@packages/database";
 import { users } from "@packages/database/src/tables/users";
 import acceptLanguage from "accept-language";
 import { nanoid } from "nanoid";
+import { href } from "react-router";
 import type { OAuth2Strategy } from "remix-auth-oauth2";
 import invariant from "tiny-invariant";
-import type { SessionUser } from "./authenticator.server";
+import type { SessionUser } from "./session-user";
 
 const clientId = process.env["GOOGLE_CLIENT_ID"];
 invariant(clientId, "環境変数`GOOGLE_CLIENT_ID`が設定されていません");
@@ -17,7 +18,7 @@ const isDev = process.env["NODE_ENV"] === "development";
 const devOrigin = "http://localhost:5173";
 const prodOrigin = "https://example.com";
 // biome-ignore lint/style/useNamingConvention: @coji/remix-auth-google
-const redirectURI = `${isDev ? devOrigin : prodOrigin}/auth/google/callback`;
+const redirectURI = `${isDev ? devOrigin : prodOrigin}${href("/auth/google/callback")}`;
 
 const verifyUser: OAuth2Strategy<SessionUser>["verify"] = async ({
 	request,
