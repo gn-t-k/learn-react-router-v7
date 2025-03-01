@@ -3,9 +3,10 @@ import { googleStrategy } from "./google-strategy";
 import type { SessionUser } from "./session-user";
 
 const authenticator = new Authenticator<SessionUser>();
-authenticator.use(googleStrategy, "google");
 
+const google = "google";
+authenticator.use(googleStrategy, google);
 type AuthenticateByGoogle = (request: Request) => Promise<SessionUser>;
 export const authenticateByGoogle: AuthenticateByGoogle = async (request) => {
-	return await authenticator.authenticate("google", request);
+	return await authenticator.authenticate(google, request);
 };

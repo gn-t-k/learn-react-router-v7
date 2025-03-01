@@ -7,7 +7,8 @@ import {
 	CardTitle,
 } from "@packages/react-components";
 import type { FC } from "react";
-import { card, cardFooter, container } from "./page.css";
+import { Link, href } from "react-router";
+import { card, cardFooter, container } from "./route.css";
 
 const Page: FC = () => {
 	return (
@@ -20,7 +21,9 @@ const Page: FC = () => {
 					<p>Googleアカウントでログインして利用できます</p>
 				</CardContent>
 				<CardFooter className={cardFooter}>
-					<Button>ログインボタン</Button>
+					<Button>
+						<Link to={href("/auth/google")}>ログイン</Link>
+					</Button>
 				</CardFooter>
 			</Card>
 		</main>

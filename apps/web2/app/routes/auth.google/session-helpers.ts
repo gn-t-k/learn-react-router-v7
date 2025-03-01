@@ -22,18 +22,27 @@ const sessionStorage = createCookieSessionStorage<SessionStorage>({
 type GetSession = (
 	request: Request,
 ) => Promise<Session<SessionStorage, SessionStorage>>;
-export const getSession: GetSession = async (request) => {
+const getSession: GetSession = async (request) => {
 	return await sessionStorage.getSession(request.headers.get("Cookie"));
 };
+
+const sessionUserKey = "user";
 
 type SaveSession = (request: Request, user: SessionUser) => Promise<Headers>;
 export const saveSession: SaveSession = async (request, user) => {
 	const session = await getSession(request);
-	session.set("user", user);
+	session.set(sessionUserKey, user);
 
 	return new Headers({
 		"Set-Cookie": await sessionStorage.commitSession(session),
 	});
+};
+
+type GetSessionUser = (request: Request) => Promise<SessionUser | undefined>;
+export const getSessionUser: GetSessionUser = async (request) => {
+	const session = await getSession(request);
+
+	return session.get(sessionUserKey);
 };
 
 type DestroySession = (request: Request) => Promise<Headers>;
