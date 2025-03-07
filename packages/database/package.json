@@ -11,13 +11,13 @@
 		"migration:apply:production": "dotenv -- drizzle-kit migrate"
 	},
 	"dependencies": {
-		"drizzle-orm": "^0.38.3"
+		"drizzle-orm": "^0.40.0"
 	},
 	"devDependencies": {
-		"drizzle-kit": "^0.30.1",
+		"@types/node": "^20",
 		"dotenv-cli": "^7.4.3",
-		"wrangler": "^3.87.0",
+		"drizzle-kit": "^0.30.5",
 		"typescript": "^5.7.2",
-		"@types/node": "^20"
+		"wrangler": "^3.87.0"
 	}
 }
