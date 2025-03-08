@@ -6,13 +6,16 @@ import { nanoid } from "nanoid";
 import { href } from "react-router";
 import type { OAuth2Strategy } from "remix-auth-oauth2";
 import invariant from "tiny-invariant";
-import type { SessionUser } from "./session-user";
+import type { SessionUser } from "./session-helpers";
 
-const clientId = process.env["GOOGLE_CLIENT_ID"];
-invariant(clientId, "環境変数`GOOGLE_CLIENT_ID`が設定されていません");
+const clientId = process.env["GOOGLE_AUTH_CLIENT_ID"];
+invariant(clientId, "環境変数`GOOGLE_AUTH_CLIENT_ID`が設定されていません");
 
-const clientSecret = process.env["GOOGLE_CLIENT_SECRET"];
-invariant(clientSecret, "環境変数`GOOGLE_CLIENT_SECRET`が設定されていません");
+const clientSecret = process.env["GOOGLE_AUTH_CLIENT_SECRET"];
+invariant(
+	clientSecret,
+	"環境変数`GOOGLE_AUTH_CLIENT_SECRET`が設定されていません",
+);
 
 const isDev = process.env["NODE_ENV"] === "development";
 const devOrigin = "http://localhost:5173";

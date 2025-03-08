@@ -5,6 +5,6 @@ import type { Route } from "./+types/route";
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
 	const user = await authenticateByGoogle(request);
-	const headers = await saveSession(request, user);
+	const headers = await saveSession(request)(user);
 	return redirect(href("/"), { headers });
 };

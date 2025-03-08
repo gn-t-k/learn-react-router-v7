@@ -3,6 +3,8 @@ import { drizzle } from "drizzle-orm/d1";
 import type { AnyD1Database, DrizzleD1Database } from "drizzle-orm/d1";
 import { schema } from "./schema";
 
+export * from "drizzle-orm";
+
 export * from "./schema";
 
 type Database = DrizzleD1Database<typeof schema>;

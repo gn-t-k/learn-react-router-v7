@@ -1,11 +1,19 @@
 import { type Session, createCookieSessionStorage } from "react-router";
 import invariant from "tiny-invariant";
-import type { SessionUser } from "./session-user";
 
 const sessionSecret = process.env["SESSION_SECRET"];
-const nodeEnv = process.env["NODE_ENV"];
 invariant(sessionSecret, "環境変数`SESSION_SECRET`が設定されていません");
+
+const nodeEnv = process.env["NODE_ENV"];
 invariant(nodeEnv, "環境変数`NODE_ENV`が設定されていません");
+
+export type SessionUser = {
+	id: string;
+	email: string;
+	name: string;
+	imageUrl: string;
+	locale: string;
+};
 
 type SessionStorage = { user: SessionUser };
 const sessionStorage = createCookieSessionStorage<SessionStorage>({
@@ -28,8 +36,10 @@ const getSession: GetSession = async (request) => {
 
 const sessionUserKey = "user";
 
-type SaveSession = (request: Request, user: SessionUser) => Promise<Headers>;
-export const saveSession: SaveSession = async (request, user) => {
+type SaveSession = (
+	request: Request,
+) => (user: SessionUser) => Promise<Headers>;
+export const saveSession: SaveSession = (request) => async (user) => {
 	const session = await getSession(request);
 	session.set(sessionUserKey, user);
 
