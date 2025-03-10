@@ -18,5 +18,7 @@ export const getTasks: GetTasks = async (ownerId) => {
 		.from(tasksTable)
 		.where(eq(tasksTable.ownerId, ownerId));
 
+	await new Promise((resolve) => setTimeout(resolve, 1000));
+
 	return tasks;
 };

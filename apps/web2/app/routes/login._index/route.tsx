@@ -6,11 +6,24 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@packages/react-components";
+import {
+	redirectToSearchParams,
+	setRedirectTo,
+} from "app/features/auth/redirect-manager";
 import type { FC } from "react";
-import { Link, href } from "react-router";
+import { Link, data, href } from "react-router";
+import type { Route } from "./+types/route";
 import { card, cardFooter, container } from "./route.css";
 
-const Page: FC = () => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
+	const url = new URL(request.url);
+	const redirectTo = url.searchParams.get(redirectToSearchParams) || "/";
+	const headers = await setRedirectTo(redirectTo);
+
+	return data(null, { headers });
+};
+
+const Page: FC<Route.ComponentProps> = () => {
 	return (
 		<main className={container}>
 			<Card className={card}>

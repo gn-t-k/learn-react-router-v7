@@ -1,6 +1,7 @@
+import { redirectToSearchParams } from "app/features/auth/redirect-manager";
+import { getSessionUser } from "app/features/auth/user-session-manager.server";
 import type { FC } from "react";
 import { Link, href } from "react-router";
-import { getSessionUser } from "../auth.google/session-helpers";
 import type { Route } from "./+types/route";
 import { findUser } from "./find-user.server";
 
@@ -18,6 +19,9 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
 
 const Page: FC<Route.ComponentProps> = ({ loaderData }) => {
 	const { user, isOwnPage } = loaderData;
+	const params = new URLSearchParams({
+		[redirectToSearchParams]: `/users/${user.id}`,
+	}).toString();
 
 	return (
 		<main>
@@ -26,7 +30,7 @@ const Page: FC<Route.ComponentProps> = ({ loaderData }) => {
 			<Link to={href("/users/:userId/tasks", { userId: user.id })}>
 				タスク一覧
 			</Link>
-			{isOwnPage && <Link to={href("/logout")}>ログアウト</Link>}
+			{isOwnPage && <Link to={`${href("/logout")}?${params}`}>ログアウト</Link>}
 		</main>
 	);
 };
